@@ -50,7 +50,7 @@ func ImportData(ctx context.Context, client *weaviate.Client) error {
 	objectsChunks := GetObjectsChunks(insertObjects, batchSize)
 
 	for i, objectChunk := range objectsChunks {
-		logger.Info("adding chunk of to db", zap.Any("chunk-size", batchSize))
+		logger.Info("adding chunk of to db", zap.Int("chunk-size", batchSize))
 
 		_, err := client.Batch().ObjectsBatcher().WithObjects(objectChunk...).Do(ctx)
 		if err != nil {
@@ -59,7 +59,7 @@ func ImportData(ctx context.Context, client *weaviate.Client) error {
 			// return err
 		}
 
-		logger.Info("added objects to db", zap.Any("number-of-objects", i*batchSize))
+		logger.Info("added objects to db", zap.Int("number-of-objects", i*batchSize))
 	}
 	return nil
 }
