@@ -1,4 +1,4 @@
-# winery
+# randovec
 
 - Adds random vector data to a weaviate instance
 
